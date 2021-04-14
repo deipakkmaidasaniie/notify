@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+function notifyMe() {
+    Notification.requestPermission;
+            console.log(Notification.permission);
+            var fruit1 = document.getElementById('cb1').checked;
+            var fruit2 = document.getElementById('cb2').checked;
+            var fruit3 = document.getElementById('cb3').checked;
+            
+            var flag=null;
+           
+            if(fruit1 || fruit2 || fruit3)
+            {
+            flag=1;
+            }
+            else{
+                alert(fruit1+" "+fruit2+" "+fruit3);
+            }
+  if (!("Notification" in window)) {
+    alert("This browser does not support system notifications");
+  }
+  else if (Notification.permission === "granted" && flag!=null) {
+    notify();
+  }
+  else if (Notification.permission !== 'denied' && flag!=null) {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        notify();
+      }
+    });
+  }
+
+  
+  function notify() {
+    var notification = new Notification('Hey Whats up Deepak!', {
+      icon: 'fruits.jpg',
+      body: "Hey! You have selected great list of fruits!",
+    });
+
+    notification.onclick = function () {
+        alert("Notification clicked!");
+      window.open("http://google.com");      
+    };
+    setTimeout(notification.close.bind(notification), 1000); 
+  }
+
+}
+notifyMe();
+</script>
+<body>
+    
+        <form>
+        <input type="checkbox" id="cb1" name="fruit" value="Apple"> Apple<br>
+        <input type="checkbox" id="cb2" name="fruit" value="Orange"> Orange <br>
+        <input type="checkbox" id="cb3" name="fruit" value="Banana"> Banana <br>
+        <input type="submit" value="submit" onclick="notifyMe() ">
+        </form>
+</body>
+    
+</body>
+</html>

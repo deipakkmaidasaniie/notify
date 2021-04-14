@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="checkbox" id="cb1" name="fruit" value="Apple"> Apple <br>
+    <input type="checkbox" id="cb2" name="fruit" value="Orange"> Orange <br>
+    <input type="checkbox" id="cb3" name="fruit" value="Banana"> Banana <br>
+    <input type="button" value="submit" onclick="func() ">
+    <script>
+        function func() {
+            var a = document.getElementById('cb1').checked
+            var b = document.getElementById('cb2').checked
+            var c = document.getElementById('cb3').checked
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            var flag = null;
+
+            if (a || b || c === true) {
+                flag = 1;
+            }
+            else
+            {
+                alert("Choose atleast one ")
+            }
+            console.log(flag);
+            //it has 3 possible values: default, granted and denied
+            function showNotification() {
+                const notification = new Notification("New message from deepak!", {
+                    body: "hey mate, oon?"
+                });
+                notification.onclick = function () {
+                    alert("Notification clicked!"),
+                        window.open("http://google.com")
+                };
+            }
+            console.log(Notification.permission);
+            if (Notification.permission === "granted" && flag === 1) {
+                showNotification();
+            }
+
+            else if (Notification.permission != "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted" && flag === 1) {
+                        showNotification();
+                    }
+
+                })
+            }
+
+        }
+    </script>
+</body>
+
+</html>
